@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>เราอยู่ด้วยกันมากี่วันแล้วนะ 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Sriracha', cursive;
+    }
+    body {
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px #f48fb1;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #fff9c4;
+    }
+    .counter {
+      font-size: 1.5rem;
+      background-color: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: floatUp 5s linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        bottom: -20px;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100vh;
+        transform: translateX(-50px);
+        opacity: 0;
+      }
+    }
+    .btn-back {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #fff;
+      color: #a64ac9;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+    .btn-back:hover {
+      background-color: #f1d1f8;
+    }
+  </style>
+</head>
+<body>
+  <h1>เค้ากับเธอ 💕</h1>
+  <h2>คบกันมากี่วันแล้วนะ?</h2>
+  <div class="counter" id="love-counter">กำลังโหลด...</div>
+
+  <a href="index.html" class="btn-back">← กลับหน้าหลัก</a>
+
+  <script>
+    const startDate = new Date("2025-05-25T00:00:00");
+
+    function updateCounter() {
+      const now = new Date();
+      const diffTime = now - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      let years = Math.floor(diffDays / 365);
+      let months = Math.floor((diffDays % 365) / 30);
+      let days = diffDays - (years * 365 + months * 30);
+
+      document.getElementById("love-counter").innerHTML = `
+        💘 เราคบกันมาแล้ว <br>
+        <b>${years}</b> ปี <b>${months}</b> เดือน <b>${days}</b> วัน <br>
+        (${diffDays.toLocaleString()} วันเต็มๆ!) 💖
+      `;
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // หัวใจลอย
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
